@@ -56,7 +56,6 @@ instance (a ~ a', b ~ b') => Limit (Singleton KnownBool) (->) (BoolDiag a b) (a'
 	project (x, y) = let result = observeBool result (Fst x) (Snd y) in result
 	mediate x = (getFst (project x), getSnd (project x))
 
-{-
 instance Product (->) (,) where
 	type ProductDiag (,) = BoolDiag
 	fst = getFst . project
@@ -74,20 +73,3 @@ instance Coproduct (->) Either where
 	left = coproject . Fst
 	right = coproject . Snd
 	observeCoproduct = ACoproduct
-
-data BoolNTDiag (f :: * -> *) (g :: kk -> *) (k :: Bool) (a :: *) where
-	NTFst :: { getNTFst :: f a } -> BoolNTDiag f g False a
-	NTSnd :: { getNTSnd :: g a } -> BoolNTDiag f g True a
-
-data NTProd f g a = NTProd (f a) (g a)
-
-instance (Functor (->) (->) f, Functor (->) (->) g) => Functor (->) (->) (BoolNTDiag f g k) where
-	fmap f (NTFst x) = NTFst (fmap f x)
-	fmap f (NTSnd x) = NTSnd (fmap f x)
-
-instance (f ~ f', g ~ g') => Limit (Singleton KnownBool) (NT (->) (->)) (BoolNTDiag f g) (NTProd f g) where
-	project = NT $ \(NTProd fx gx) -> let result = observeBool (proxy result) (NTFst fx) (NTSnd gx) in result
-		where
-			proxy :: p a b -> Proxy a
-			proxy _ = Proxy
--}
