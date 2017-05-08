@@ -2,7 +2,8 @@
 
 module CT.Category
 	(
-		Category(..)
+		Category(..),
+		Iso(..),
 	)
 	where
 

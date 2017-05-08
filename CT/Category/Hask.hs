@@ -2,6 +2,7 @@
 
 module CT.Category.Hask
 	(
+		Always(..),
 	)
 	where
 

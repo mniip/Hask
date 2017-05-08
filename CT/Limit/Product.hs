@@ -2,6 +2,10 @@
 
 module CT.Limit.Product
 	(
+		KnownBool(..),
+		BoolDiag(..),
+		AProduct(..), ACoproduct(..),
+		Product(..), Coproduct(..),
 	)
 	where
 
